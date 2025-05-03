@@ -67,11 +67,7 @@ def register():
         return error_response("Email already exists")
 
     # Create new user
-    #new_user = User(username=username, email=data["email"], password=password)  edit
-    new_user = User(username=username, email=data["email"])
-    new_user.password = password  # This triggers the hashing setter
-
-
+    new_user = User(username=username, email=data["email"], password=password)
 
     # Add first_name and last_name if provided
     if first_name:
@@ -112,7 +108,7 @@ def login():
     additional_claims = {'role': user.role, 'password': data['password']}
 
     # Create access token and refresh token
-    access_token = create_access_token(identity=user.id, fresh=True, additional_claims=additional_claims)  #edit
+    access_token = create_access_token(identity=user.id, fresh=True, additional_claims=additional_claims)
 
     refresh_token = create_refresh_token(identity=user.id, additional_claims=additional_claims)
 

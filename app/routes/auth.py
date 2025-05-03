@@ -108,7 +108,8 @@ def login():
     additional_claims = {'role': user.role, 'password': data['password']}
 
     # Create access token and refresh token
-    access_token = create_access_token(identity=user.id, additional_claims=additional_claims)
+    access_token = create_access_token(identity=user.id, fresh=True, additional_claims=additional_claims)
+
     refresh_token = create_refresh_token(identity=user.id, additional_claims=additional_claims)
 
     response_data = {"message": "Login successful", "user": user.to_dict()}
